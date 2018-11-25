@@ -8,19 +8,26 @@
 import Vue from 'vue';
 import L from 'leaflet';
 import 'leaflet-gpx';
-import { Component, Emit, Prop } from 'vue-property-decorator';
 import { findRealParent, propsBinder } from 'vue2-leaflet';
 
-@Component
-export default class LGpx extends Vue {
-    @Prop(String) private gpxFile!: string;
-    @Prop({ default: true }) private visible!: boolean;
-
-    private ready: boolean = false;
-    private mapObject!: L.GPX;
-    private parentContainer: any;
-
-    private mounted() {
+const LGpx = Vue.extend({
+    props: {
+        gpxFile: {
+            type: String,
+        },
+        visible: {
+            type: Boolean,
+            default: true,
+        },
+    },
+    data() {
+        return {
+            ready: false,
+            mapObject: null as null | L.GPX,
+            parentContainer: null as any,
+        };
+    },
+    mounted() {
         this.mapObject = new L.GPX(this.$props.gpxFile, { async: true })
             .on('loaded', this.gpxLoaded)
             .on('addpoint', this.addpoint)
@@ -31,21 +38,22 @@ export default class LGpx extends Vue {
         this.ready = true;
         this.parentContainer = findRealParent(this.$parent);
         this.parentContainer.addLayer(this);
-    }
+    },
+    beforeDestroy() {
+        this.parentContainer.removeLayer(this);
+    },
+    methods: {
+        gpxLoaded() {
+            this.$emit('gpx-loaded', this.mapObject);
+        },
+        addpoint(point: object) {
+            this.$emit('addpoint', point);
+        },
+        addline(line: object) {
+            this.$emit('addline', line);
+        },
+    },
+});
 
-    @Emit()
-    private gpxLoaded() {
-        return this.mapObject;
-    }
-
-    @Emit()
-    private addpoint(point: object) {
-        return point;
-    }
-
-    @Emit()
-    private addline(line: object) {
-        return line;
-    }
-}
+export default LGpx;
 </script>
