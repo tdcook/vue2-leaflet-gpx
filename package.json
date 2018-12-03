@@ -1,14 +1,22 @@
 {
   "name": "vue2-leaflet-gpx",
-  "version": "0.1.0",
-  "private": true,
+  "version": "1.0.0",
   "main": "dist/vue2-leaflet-gpx.umd.min.js",
   "module": "dist/vue2-leaflet-gpx.common.js",
+  "license": "ISC",
+  "homepage": "https://fossil.trevorcook.name/repos/vue2-leaflet-gpx/",
+  "bugs": {
+    "email": "trevor@trevorcook.name",
+    "url": "https://fossil.trevorcook.name/repos/vue2-leaflet-gpx/ticket"
+  },
+  "repository": {
+    "type": "fossil",
+    "url": "https://fossil.trevorcook.name/repos/vue2-leaflet-gpx/"
+  },
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build --mode production --target lib --name vue2-leaflet-gpx src/LGpx.vue",
-    "lint": "vue-cli-service lint",
-    "test:unit": "vue-cli-service test:unit"
+    "lint": "vue-cli-service lint"
   },
   "files": [
     "dist/",
