@@ -13,7 +13,8 @@ module.exports = {
             }
           },
           { 'vue2-leaflet': 'vue2-leaflet' },
-          { 'vue': 'vue' }
+          { 'vue': 'vue' },
+          { 'leaflet-gpx': 'leaflet-gpx' }
         ]
       };
     }
