@@ -16,9 +16,9 @@ To use it, put something like this in your template:
 
 This component accepts the following props:
 
-`gpx-file`: a string with the contents of a GPX file, or a URL to a GPX file
-`gpx-options`: the options object passed to the L.GPX constructor. Defaults to `{ async: true }`.
-`visible`: boolean
+* `gpx-file`: a string with the contents of a GPX file, or a URL to a GPX file
+* `gpx-options`: the options object passed to the L.GPX constructor. Defaults to `{ async: true }`.
+* `visible`: boolean
 
 This component emits the `gpx-loaded` event, emitted when the leaflet-gpx `loaded` event is fired, and passes the event object. It also emits the `addline` and `addpoint` event corresponding to those same events from leaflet-gpx. See the [leaflet-gpx documentation](https://github.com/mpetazzoni/leaflet-gpx/blob/master/README.md) for
 more information.
