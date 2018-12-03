@@ -15,9 +15,22 @@ const LGpx = Vue.extend({
         gpxFile: {
             type: String,
         },
+        gpxOptions: {
+            type: Object,
+            default: () => ({ async: true }),
+        },
         visible: {
             type: Boolean,
             default: true,
+        },
+    },
+    watch: {
+        visible(newValue) {
+            if (newValue) {
+                this.parentContainer.addLayer(this);
+            } else {
+                this.parentContainer.removeLayer(this);
+            }
         },
     },
     data() {
@@ -28,7 +41,7 @@ const LGpx = Vue.extend({
         };
     },
     mounted() {
-        this.mapObject = new L.GPX(this.$props.gpxFile, { async: true })
+        this.mapObject = new L.GPX(this.$props.gpxFile, this.$props.gpxOptions)
             .on('loaded', this.gpxLoaded)
             .on('addpoint', this.addpoint)
             .on('addline', this.addline);
@@ -43,14 +56,14 @@ const LGpx = Vue.extend({
         this.parentContainer.removeLayer(this);
     },
     methods: {
-        gpxLoaded() {
-            this.$emit('gpx-loaded', this.mapObject);
+        gpxLoaded(loadedEvent: L.LeafletEvent) {
+            this.$emit('gpx-loaded', loadedEvent);
         },
-        addpoint(point: object) {
-            this.$emit('addpoint', point);
+        addpoint(addPointEvent: L.LeafletEvent) {
+            this.$emit('addpoint', addPointEvent);
         },
-        addline(line: object) {
-            this.$emit('addline', line);
+        addline(addLineEvent: L.LeafletEvent) {
+            this.$emit('addline', addLineEvent);
         },
     },
 });
