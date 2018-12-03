@@ -4,9 +4,10 @@
       <l-tile-layer :url="url" :attribution="attribution" />
       <l-gpx
         :gpx-file="require('@/sample.gpx')"
-        :gpx-options="gpxOptions"
+        :visible="gpxVisible"
         @gpx-loaded="onGpxLoaded" />
     </l-map>
+    <button class="button" @click="onClickButton">Hide/Show Track</button>
   </div>
 </template>
 
@@ -15,14 +16,6 @@ import L from 'leaflet';
 import { LMap, LTileLayer } from 'vue2-leaflet';
 import { Component, Vue } from 'vue-property-decorator';
 import LGpx from './LGpx.vue';
-
-// @ts-ignore: Property does not exist
-delete L.Icon.Default.prototype._getIconUrl;
-L.Icon.Default.mergeOptions({
-  iconRetinaUrl: require('leaflet/dist/images/marker-icon-2x.png'),
-  iconUrl: require('leaflet/dist/images/marker-icon.png'),
-  shadowUrl: require('leaflet/dist/images/marker-shadow.png'),
-});
 
 @Component({
   components: {
@@ -38,12 +31,16 @@ L.Icon.Default.mergeOptions({
   }),
 })
 export default class Example extends Vue {
-  private gpxOptions = {
-    async: false,
-  };
-  private onGpxLoaded(gpxMapObject: L.GPX) {
+  private gpxVisible = true;
+
+  private onGpxLoaded(loadedEvent: L.LeafletEvent) {
     const { mapObject } = this.$refs.map as LMap;
+    const gpxMapObject: L.GPX = loadedEvent.target;
     mapObject.fitBounds(gpxMapObject.getBounds());
+  }
+
+  private onClickButton() {
+    this.gpxVisible = !this.gpxVisible;
   }
 }
 </script>
@@ -54,5 +51,12 @@ export default class Example extends Vue {
 html, body, #example {
   height: 100%;
   margin: 0;
+}
+
+.button {
+  position: absolute;
+  top: .7rem;
+  left: 3rem;
+  z-index: 9999;
 }
 </style>
