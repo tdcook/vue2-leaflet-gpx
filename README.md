@@ -1,24 +1,38 @@
 # vue2-leaflet-gpx
 
-## Project setup
+This is a [vue2-leaflet](https://github.com/KoRiGaN/Vue2Leaflet) wrapper for the [leaflet-gpx](https://github.com/mpetazzoni/leaflet-gpx) plugin.
+
+To use it, put something like this in your template:
+
 ```
-npm install
+<l-map ref="map" :zoom="zoom" :center="center">
+  <l-tile-layer :url="url" :attribution="attribution" />
+  <l-gpx
+    :gpx-file="https://example.com/my-gpx-file.gpx"
+    :gpx-options="gpxOptions"
+    @gpx-loaded="onGpxLoaded" />
+</l-map>
 ```
 
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
+This component accepts the following props:
 
-### Compiles and minifies for production
-```
-npm run build
-```
+`gpx-file`: a string with the contents of a GPX file, or a URL to a GPX file
+`gpx-options`: the options object passed to the L.GPX constructor. Defaults to `{ async: true }`.
+`visible`: boolean
 
-### Lints and fixes files
-```
-npm run lint
-```
+This component emits the `gpx-loaded` event, emitted when the leaflet-gpx `loaded` event is fired, and passes the event object. It also emits the `addline` and `addpoint` event corresponding to those same events from leaflet-gpx. See the [leaflet-gpx documentation](https://github.com/mpetazzoni/leaflet-gpx/blob/master/README.md) for
+more information.
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+See `src/Example.vue` for a usage example.
+
+## Development
+
+The source of the library is in `src/LGpx.vue`. Run `npm install` to fetch dependencies. `npm run serve` launches a hot-reloading server that serves the `src/Example.vue` component in a minimal app. `npm run build` bundles the distribution bundle of the library.
+
+## Contributions
+
+Contributions are welcome. If you would like to make a contribution, please note that the official home of this page is [my Fossil repo](https://fossil.trevorcook.name/repos/vue2-leaflet-gpx/home). The GitHub repo is a read-only mirror.
+
+## License
+
+This project uses the ISC license.
