@@ -6,12 +6,12 @@
   "license": "ISC",
   "homepage": "https://fossil.trevorcook.name/repos/vue2-leaflet-gpx/",
   "bugs": {
-    "email": "trevor@trevorcook.name",
-    "url": "https://fossil.trevorcook.name/repos/vue2-leaflet-gpx/ticket"
+    "email": "trevor@trevorcook.dev",
+    "url": "https://trevorcook.dev/repos/vue2-leaflet-gpx/ticket"
   },
   "repository": {
     "type": "fossil",
-    "url": "https://fossil.trevorcook.name/repos/vue2-leaflet-gpx/"
+    "url": "https://trevorcook.dev/repos/vue2-leaflet-gpx/"
   },
   "scripts": {
     "serve": "vue-cli-service serve",

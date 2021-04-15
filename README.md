@@ -31,7 +31,7 @@ The source of the library is in `src/LGpx.vue`. Run `npm install` to fetch depen
 
 ## Contributions
 
-Contributions are welcome. If you would like to make a contribution, please note that the official home of this project is [my Fossil repo](https://fossil.trevorcook.name/repos/vue2-leaflet-gpx/home). The GitHub repo is a read-only mirror.
+Contributions are welcome. If you would like to make a contribution, please note that the official home of this project is [my Fossil repo](https://trevorcook.dev/repos/vue2-leaflet-gpx/home). The GitHub repo is a read-only mirror.
 
 ## License
 
