@@ -16,6 +16,7 @@ import L from 'leaflet';
 import { LMap, LTileLayer } from 'vue2-leaflet';
 import { Component, Vue } from 'vue-property-decorator';
 import LGpx from './LGpx.vue';
+import 'leaflet/dist/leaflet.css';
 
 @Component({
   components: {
@@ -45,9 +46,7 @@ export default class Example extends Vue {
 }
 </script>
 
-<style lang="scss">
-@import '~leaflet/dist/leaflet.css';
-
+<style>
 html, body, #example {
   height: 100%;
   margin: 0;
