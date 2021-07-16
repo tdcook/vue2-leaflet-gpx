@@ -32,6 +32,12 @@ const LGpx = Vue.extend({
                 this.parentContainer.removeLayer(this);
             }
         },
+        gpxFile() {
+            this.setup();
+        },
+        gpxOptions() {
+            this.setup();
+        }
     },
     data() {
         return {
@@ -41,21 +47,29 @@ const LGpx = Vue.extend({
         };
     },
     mounted() {
-        this.mapObject = new L.GPX(this.$props.gpxFile, this.$props.gpxOptions)
-            .on('loaded', this.gpxLoaded)
-            .on('addpoint', this.addpoint)
-            .on('addline', this.addline);
-
-        // @ts-ignore
-        L.DomEvent.on(this.mapObject, this.$listeners);
-        this.ready = true;
-        this.parentContainer = findRealParent(this.$parent);
-        this.parentContainer.addLayer(this);
+        this.setup();
     },
     beforeDestroy() {
         this.parentContainer.removeLayer(this);
     },
     methods: {
+        setup() {
+            if (this.mapObject) {
+                this.parentContainer.removeLayer(this);
+                // @ts-ignore
+                L.DomEvent.off(this.mapObject, this.$listeners);
+            }
+            this.mapObject = new L.GPX(this.$props.gpxFile, this.$props.gpxOptions)
+                .on('loaded', this.gpxLoaded)
+                .on('addpoint', this.addpoint)
+                .on('addline', this.addline);
+
+            // @ts-ignore
+            L.DomEvent.on(this.mapObject, this.$listeners);
+            this.ready = true;
+            this.parentContainer = findRealParent(this.$parent);
+            this.parentContainer.addLayer(this);
+        },
         gpxLoaded(loadedEvent: L.LeafletEvent) {
             this.$emit('gpx-loaded', loadedEvent);
         },
