@@ -37,7 +37,7 @@ const LGpx = Vue.extend({
         },
         gpxOptions() {
             this.setup();
-        }
+        },
     },
     data() {
         return {
