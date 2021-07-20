@@ -1,6 +1,6 @@
 {
   "name": "vue2-leaflet-gpx",
-  "version": "2.0.0",
+  "version": "2.1.0",
   "main": "dist/vue2-leaflet-gpx.umd.min.js",
   "module": "dist/vue2-leaflet-gpx.common.js",
   "license": "ISC",
